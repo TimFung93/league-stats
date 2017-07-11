@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 
 
+
 export default class Header extends Component {
 
 
@@ -16,7 +17,15 @@ export default class Header extends Component {
 
     return (
       <div className="App">
+
         <h1>You have reached Header</h1>
+
+        <div className="col-md-12"> 
+        <p>Picture</p>
+
+        </div>
+
+
 
       </div>
     );

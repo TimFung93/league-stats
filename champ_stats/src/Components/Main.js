@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 
 
@@ -17,6 +18,24 @@ export default class Main extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
+
+
+  componentWillMount(){
+    axios.get('http://localhost:8080/')
+      .catch(err => {
+        console.log(err);
+      })
+      .then(res => {
+        if (res.status !== 200) {
+          throw "Network Error"
+        } else {
+          this.setState({
+            data: res
+          });
+        }
+        
+      })
+  };
 
 
 
@@ -46,8 +65,9 @@ export default class Main extends Component {
      
 
       const getChampionName = function(){
-        let championArray = []
+        let championArray = [];
         let champion;
+   
         for (let key in championData) {
           let champList = championData[key]
           for (let key in champList) {
@@ -56,20 +76,35 @@ export default class Main extends Component {
             
           }
         }
-
+     
         return championArray
        
+      }
+      
+      const getChampionStats = function() {
+        let championStats = []; 
+        let stat;
+        for (let key in championData) {
+          let statList = championData[key]
+          for (let stat in statList) {
+            stat = statList[stat].stats
+            championStats.push(stat)
+
+          }
+        }
+        console.log(championStats)
+        return championStats
       }
 
 
 
 
-      let _championName = getChampionName()
+      let _championName = getChampionName();
+
       
       let __championName = _championName.map(data => {
-        return <a href="/:id" onClick={this.handleClick}> <p>{data}</p> </a>
+        return <a href='/' onClick={this.handleClick}> <p>{data}</p></a>
       });
-
 
 
       
@@ -86,6 +121,15 @@ export default class Main extends Component {
     return (
       <div className="App">
         <h1>You have reached main</h1>
+        <div className='container'> 
+          <div className='row'>
+            <div className='col-md-12'>
+              {__championName}
+
+            </div>
+          </div>
+        </div>
+        
 
       </div>
     );
