@@ -53,8 +53,9 @@ export default class Main extends Component {
   }
 
 
-  handleClick() {
+  handleClick(event) {
     console.log('this linked as clicked')
+    event.preventDefault();
   }
 
 
@@ -64,46 +65,72 @@ export default class Main extends Component {
       const championData = this.state.data.data
      
 
-      const getChampionName = function(){
-        let championArray = [];
+      const getChampionData = function(){
+        let championDataArray = [];
         let champion;
    
         for (let key in championData) {
           let champList = championData[key]
           for (let key in champList) {
-            champion = champList[key].name
-            championArray.push(champion)
+            champion = champList[key]
+            championDataArray.push(champion)
             
           }
         }
      
-        return championArray
+        return championDataArray
        
       }
-      
-      const getChampionStats = function() {
-        let championStats = []; 
-        let stat;
-        for (let key in championData) {
-          let statList = championData[key]
-          for (let stat in statList) {
-            stat = statList[stat].stats
-            championStats.push(stat)
 
-          }
+      let _championData = getChampionData();
+
+       let getNameList = function() {
+        let nameList = []
+        for (let key in _championData) {
+          let nameOfChamp = _championData[key].name
+          nameList.push(nameOfChamp)
         }
-        console.log(championStats)
-        return championStats
+        return nameList
       }
 
 
+       let getIdList = function() {
+        let idList = []
+        for (let key in _championData) {
+          let nameOfChamp = _championData[key].id
+          idList.push(nameOfChamp)
+        }
+        return idList
+      }
+      
+      
+     
 
 
-      let _championName = getChampionName();
+
+      let nameList = getNameList()
+      let idList = getIdList()
+
 
       
-      let __championName = _championName.map(data => {
-        return <a href='/' onClick={this.handleClick}> <p>{data}</p></a>
+
+     
+
+      console.log(nameList)
+      console.log(idList)
+      //console.log(_championName)
+      
+      let __championName = nameList.map(data => {
+
+        return <div className='col-md-4'>
+                <div className='card'><img src='#'/> 
+                  <div className='card-container'> 
+                    <a href='/' className ='card' onClick={this.handleClick}> 
+                      <p>{data}</p>
+                    </a> 
+                  </div>
+                </div>
+              </div>
       });
 
 
@@ -119,18 +146,16 @@ export default class Main extends Component {
      
 
     return (
-      <div className="App">
+      <div>
+        <div className='App'>
         <h1>You have reached main</h1>
         <div className='container'> 
           <div className='row'>
-            <div className='col-md-12'>
-              {__championName}
-
-            </div>
+          {__championName}
           </div>
         </div>
         
-
+        </div>
       </div>
     );
   }
