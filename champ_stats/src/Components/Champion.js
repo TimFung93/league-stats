@@ -13,11 +13,11 @@ export default class Champion extends Component {
   render() {
     
   
-      let _championStat = getChampionStats();
+      // let _championStat = getChampionStats();
 
-      let __championStat = _championStat.map(stat => {
-         return <a href="/:id" onClick={this.handleClick}> <p>{stat}</p> </a>
-       });
+      // let __championStat = _championStat.map(stat => {
+      //    return <a href="/:id" onClick={this.handleClick}> <p>{stat}</p> </a>
+      //  });
 
 
      

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import {Link} from 'react-router-dom';
 
 
 
@@ -84,17 +84,28 @@ export default class Main extends Component {
 
       let _championData = getChampionData();
 
-       let getNameList = function() {
-        let nameList = []
+      let getNameList = function() {
+        let nameList = [];
         for (let key in _championData) {
           let nameOfChamp = _championData[key].name
-          nameList.push(nameOfChamp)
+          if (nameOfChamp !== undefined) {
+            nameList.push(nameOfChamp)
+          }
         }
         return nameList
       }
 
+      let getImageList = function() {
+        let imageList = [];
+        for (let key in _championData) {
+          let imageChamp = _championData[key].image
+          imageList.push(imageChamp)
+        }
+        return imageList
+      }
 
-       let getIdList = function() {
+
+      let getIdList = function() {
         let idList = []
         for (let key in _championData) {
           let nameOfChamp = _championData[key].id
@@ -103,35 +114,54 @@ export default class Main extends Component {
         return idList
       }
       
+       let getTitleList = function() {
+        let titleList = [];
+        for (let key in _championData) {
+          let titleChamp = _championData[key].title
+          titleList.push(titleChamp)
+        }
+        return titleList
+      }
       
      
 
-
-
-      let nameList = getNameList()
-      let idList = getIdList()
+      const titleList = getTitleList();
+      const imageList = getImageList();
+      const nameList = getNameList();
+      const idList = getIdList();
 
 
       
 
      
-
-      console.log(nameList)
-      console.log(idList)
+      // console.log(imageList)
+      // console.log(nameList)
+      // console.log(idList)
       //console.log(_championName)
-      
-      let __championName = nameList.map(data => {
+
+      let __championTitle = titleList.map(data =>{
+        return <p>{data}</p>
+      });
+
+      console.log(titleList)
+      console.log(__championTitle)
+      let __championName = nameList.map(name => {
 
         return <div className='col-md-4'>
-                <div className='card'><img src='#'/> 
+                <div className='card'><img src='https://images7.alphacoders.com/338/338697.png'/> 
                   <div className='card-container'> 
-                    <a href='/' className ='card' onClick={this.handleClick}> 
-                      <p>{data}</p>
+                    <a onClick={this.handleClick}> 
+                      <h3><Link to='/champion'>{name}</Link></h3>
+                  
+
+
                     </a> 
                   </div>
                 </div>
               </div>
       });
+
+    
 
 
       
@@ -152,6 +182,7 @@ export default class Main extends Component {
         <div className='container'> 
           <div className='row'>
           {__championName}
+
           </div>
         </div>
         

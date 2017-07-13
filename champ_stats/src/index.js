@@ -5,13 +5,19 @@ import App from './App';
 import Header from './Components/Header';
 import Searchbar from './Components/Searchbar';
 import Main from './Components/Main';
+import Champion from './Components/Champion';
 
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {Router, Route, hashHistory} from 'react-router';
+import { createHashHistory } from 'history';
+import {Link, HashRouter} from 'react-router-dom';
 
 ReactDOM.render((
-	<Router history={Router} >
-		<Route path='/' component={Main} />
-	</Router>
-), document.getElementById('root'))
+	<HashRouter>
+		<div>
+			<Route exact path="/" component={Main} />
+        	<Route path="/champion/:id" component={Champion} />
+		</div>
+	</HashRouter>
+), document.getElementById('root'));
 
 
