@@ -6,7 +6,7 @@ const request = require('request');
 const PORT = 8080 ;
 
 
-const url = 'https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&tags=stats&dataById=false&api_key=RGAPI-50d9c29a-f736-4295-b0e9-eaeaa2af7922'
+const url = 'https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&tags=stats&dataById=false&api_key=RGAPI-adb59fc0-e9f0-431b-880e-30470db84374';
 app.get('/', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -25,7 +25,9 @@ app.get('/', (req,res) => {
 		
 	});
 
-})
+});
+
+
 
 
 

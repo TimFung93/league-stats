@@ -11,7 +11,7 @@ export default class Main extends Component {
 
     this.state = {
       data: [],
-      value: ''
+      id: 0
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -54,8 +54,11 @@ export default class Main extends Component {
 
 
   handleClick(event) {
-    console.log('this linked as clicked')
-    event.preventDefault();
+    console.log(this.props.location)
+    console.log(this.props)
+
+ 
+
   }
 
 
@@ -66,96 +69,85 @@ export default class Main extends Component {
      
 
       const getChampionData = function(){
-        let championDataArray = [];
-        let champion;
+        let championDataObject = {
+          champions: []
+        };
    
         for (let key in championData) {
           let champList = championData[key]
           for (let key in champList) {
-            champion = champList[key]
-            championDataArray.push(champion)
+            let champion = champList[key].name
+            let championId = champList[key].id
+            championDataObject.champions.push({name: champion,id: championId})
             
           }
         }
      
-        return championDataArray
+        return championDataObject.champions
        
       }
 
+
       let _championData = getChampionData();
-
-      let getNameList = function() {
-        let nameList = [];
-        for (let key in _championData) {
-          let nameOfChamp = _championData[key].name
-          if (nameOfChamp !== undefined) {
-            nameList.push(nameOfChamp)
-          }
-        }
-        return nameList
-      }
-
-      let getImageList = function() {
-        let imageList = [];
-        for (let key in _championData) {
-          let imageChamp = _championData[key].image
-          imageList.push(imageChamp)
-        }
-        return imageList
-      }
-
-
-      let getIdList = function() {
-        let idList = []
-        for (let key in _championData) {
-          let nameOfChamp = _championData[key].id
-          idList.push(nameOfChamp)
-        }
-        return idList
-      }
-      
-       let getTitleList = function() {
-        let titleList = [];
-        for (let key in _championData) {
-          let titleChamp = _championData[key].title
-          titleList.push(titleChamp)
-        }
-        return titleList
-      }
-      
+      //console.log(championData)
+      //console.log(_championData.champions)
      
+      // let _championName = _championData.map(data => {
+      //   return {data}
+      // });
 
-      const titleList = getTitleList();
-      const imageList = getImageList();
-      const nameList = getNameList();
-      const idList = getIdList();
+      // console.log(_championName)
+      console.log(_championData)
 
 
+  
       
+      function champName(){
+        let champName = []
+        for (let i = 0; i < _championData.length; i++) {
+           champName.push(_championData[i].name)           
+        }
+         return champName
+      }
 
-     
+       function champId(){
+        let champId = []
+        for (let i = 0; i < _championData.length; i++) {
+           champId.push(_championData[i].id)           
+        }
+         return champId
+      }
+
+
+      let _champName = champName()
+      let _champId = champId()
+      console.log(_champId)
       // console.log(imageList)
       // console.log(nameList)
       // console.log(idList)
       //console.log(_championName)
 
-      let __championTitle = titleList.map(data =>{
-        return <p>{data}</p>
+      // let __championTitle = titleList.map(data =>{
+      //   return <p>{data}</p>
+      // });
+      let _____champName = Object.keys(_championData).forEach(function(key){
+      
+           let name = _championData[key].name
+           console.log(_championData[key].name)
+        
+       
       });
-
-      console.log(titleList)
-      console.log(__championTitle)
-      let __championName = nameList.map(name => {
-
+   
+  
+      let __champId = _champId.map(id => {
+        //when clicking name need to send id
+        //needs to send an object
         return <div className='col-md-4'>
                 <div className='card'><img src='https://images7.alphacoders.com/338/338697.png'/> 
                   <div className='card-container'> 
-                    <a onClick={this.handleClick}> 
-                      <h3><Link to='/champion'>{name}</Link></h3>
-                  
-
-
-                    </a> 
+                    
+                      <h3><Link to='/champion/(:id)' params={{id: 24}} onClick={this.handleClick}>{id}</Link></h3>
+                    
                   </div>
                 </div>
               </div>
@@ -181,12 +173,13 @@ export default class Main extends Component {
         <h1>You have reached main</h1>
         <div className='container'> 
           <div className='row'>
-          {__championName}
+          {__champId}
 
           </div>
         </div>
         
         </div>
+  
       </div>
     );
   }
