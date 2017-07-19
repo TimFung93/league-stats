@@ -57,7 +57,6 @@ export default class Main extends Component {
     console.log(this.props.location)
     console.log(this.props)
 
- 
 
   }
 
@@ -97,9 +96,9 @@ export default class Main extends Component {
       // });
 
       // console.log(_championName)
+      
       console.log(_championData)
-
-
+      console.log(this.state)
   
       
       function champName(){
@@ -121,7 +120,7 @@ export default class Main extends Component {
 
       let _champName = champName()
       let _champId = champId()
-      console.log(_champId)
+   
       // console.log(imageList)
       // console.log(nameList)
       // console.log(idList)
@@ -146,7 +145,7 @@ export default class Main extends Component {
                 <div className='card'><img src='https://images7.alphacoders.com/338/338697.png'/> 
                   <div className='card-container'> 
                     
-                      <h3><Link to='/champion/(:id)' params={{id: 24}} onClick={this.handleClick}>{id}</Link></h3>
+                      <h3><Link to={`/${id}`} activeClassName="active" onClick={this.handleClick}>{id}</Link></h3>
                     
                   </div>
                 </div>
