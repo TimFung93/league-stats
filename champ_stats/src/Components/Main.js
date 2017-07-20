@@ -54,8 +54,10 @@ export default class Main extends Component {
 
 
   handleClick(event) {
-    console.log(this.props.location)
-    console.log(this.props)
+    
+    this.setState({
+      id: event.target.value
+    });
 
 
   }
@@ -97,7 +99,7 @@ export default class Main extends Component {
 
       // console.log(_championName)
       
-      console.log(_championData)
+    
       console.log(this.state)
   
       

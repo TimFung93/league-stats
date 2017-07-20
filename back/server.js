@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
 const request = require('request');
-
+const fs = require('fs');
+const config = require('./config')
 
 const PORT = 8080 ;
-const API = 'RGAPI-aea2207a-e6db-41f2-8622-9a528e0c0caf';
-
+ 
+let myKey = config.MY_KEY;
 
 app.get('/', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -17,8 +18,9 @@ app.get('/', function (req, res, next) {
 
 
 
+
 app.get('/', (req,res) => {
-	const url = 'https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&tags=stats&dataById=false&api_key=' + API;
+	const url = 'https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&tags=stats&dataById=false&api_key=' + myKey;
 	request(url, (err, response, body) => {
 		if(err) {
 			console.log(err)
@@ -30,9 +32,11 @@ app.get('/', (req,res) => {
 
 });
 
-app.get('/:id', (req,res) => {
+
+
+app.get('/champion/:id', (req,res) => {
 	let id;
-	const url = 'https://na1.api.riotgames.com/lol/platform/v3/champions/'+ id + '?api_key=' + API;
+	const url = 'https://na1.api.riotgames.com/lol/platform/v3/champions/'+ id + '?api_key=' + myKey;
 	console.log(req)
 	request(url, (err,response, body) => {
 		if (err) {
