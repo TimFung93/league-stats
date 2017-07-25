@@ -15,7 +15,7 @@ ReactDOM.render((
 	<HashRouter>
 		<div>
 			<Route exact path="/" component={Main} />
-        	<Route path="/:id" name="champion" component={Champion} />
+        	<Route path="/champion/:id" name="champion" component={Champion} />
         	<Route path="/searchbar" component={Searchbar} />
         	<Route path="/header" component={Header} />
         </div>

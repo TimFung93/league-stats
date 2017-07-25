@@ -35,6 +35,7 @@ export default class Main extends Component {
         }
         
       })
+      
   };
 
 
@@ -54,10 +55,12 @@ export default class Main extends Component {
 
 
   handleClick(event) {
-    
-    this.setState({
-      id: event.target.value
-    });
+    console.log(event.target)
+    // this.setState({
+    //   id: event.target.value
+    // });
+
+    // console.log(this.props.item)
 
 
   }
@@ -146,8 +149,12 @@ export default class Main extends Component {
         return <div className='col-md-4'>
                 <div className='card'><img src='https://images7.alphacoders.com/338/338697.png'/> 
                   <div className='card-container'> 
-                    
-                      <h3><Link to={`/${id}`} activeClassName="active" onClick={this.handleClick}>{id}</Link></h3>
+                
+                      <h3><Link to={`/champion/${id}`} 
+                                activeClassName="active" 
+                                onClick={this.handleClick}>{id}
+
+                      </Link></h3>
                     
                   </div>
                 </div>

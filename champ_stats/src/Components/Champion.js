@@ -11,23 +11,29 @@ export default class Champion extends Component {
   constructor(props) {
     super(props)
 
-    this.setState = {
+    this.State = {
       data: []
     }
 
   }
 
-  componentDidMount() {
-    axios.get('http://localhost:8080')
-      .then(res => {
-        this.setState({
-          data: res
-        });
+  componentWillMount() {
+    axios.get('http://localhost:8080/champion/:id' ,{
+      params: {
+        id: parseInt(this.props.match.params.id)
+      }
+    })
+    .then(res => {
+      console.log(res)
+      this.setState({
+        data: res
       })
-      .catch(err => {
-        console.log(err)
-      });
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
+ 
 
 
 
@@ -38,13 +44,16 @@ export default class Champion extends Component {
       // {const Champion = ({ match }) => (
       //   {match.params.id}
         
+
+     console.log(this.state)
      
 
     return (
 
       <div>
           <h1>{this.props.match.params.id}</h1>
-        </div>
+          <h1>You have reached champion page</h1>
+      </div>
       
     );
   }

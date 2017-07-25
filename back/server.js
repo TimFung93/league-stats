@@ -1,7 +1,8 @@
-const express = require('express');
-const app = express();
-const request = require('request');
-const fs = require('fs');
+const express 				= require('express');
+const app 					= express();
+const request 				= require('request');
+const fs 					= require('fs');
+
 const config = require('./config')
 
 const PORT = 8080 ;
@@ -14,6 +15,11 @@ app.get('/', function (req, res, next) {
     next();
 });
 
+app.get('/champion/:id', function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
 
 
 
@@ -34,17 +40,28 @@ app.get('/', (req,res) => {
 
 
 
+// app.param('id', (req, res, next, id) => {
+// 	console.log('recieved id:', id)
+// 	next();
+// });
+
+
+
 app.get('/champion/:id', (req,res) => {
-	let id;
-	const url = 'https://na1.api.riotgames.com/lol/platform/v3/champions/'+ id + '?api_key=' + myKey;
-	console.log(req)
+	let id = req.query.id
+	console.log(req.query)
+	console.log(id)
+	const url = 'https://na1.api.riotgames.com/lol/static-data/v3/champions/'+ id + '?locale=en_US&tags=stats&api_key=' +myKey;
 	request(url, (err,response, body) => {
 		if (err) {
 			console.log(err)
 		}
-
-		res.send(body)
-	})
+		console.log(id)
+		console.log(body)
+		res.send(JSON.parse(body))
+	
+	});
+	
 });
 
 
