@@ -13,14 +13,29 @@ export default class Header extends Component {
     super(props)
 
     this.state = {
-      data: []
+      data: [],
+      clicked: false
     }
-
+    this.handleClick = this.handleClick.bind(this)
+    this.fetchData = this.fetchData.bind(this)
+    this.fetchSingleData = this.fetchSingleData.bind(this)
   }
 
   componentWillMount(){
     this.fetchData()
   }
+
+
+
+  handleClick() {
+    console.log('I have been clicked')
+    this.setState({
+      clicked: true
+    });
+  }
+
+
+
 
   fetchData() {
     axios.get('http://localhost:8080/')
@@ -53,23 +68,18 @@ export default class Header extends Component {
 
 
 
-  render() {
-    
+  render() {  
 
-  
+    console.log(this.state.clicked)
+
     return (
       <div className="App">
         <h1>You have reached Header</h1>
-
         <div className="col-md-12"> 
           <p>Picture</p>
         </div>
-
         <div>
-          {this.props.children}
-          <Main data={this.state.data.data}/>
-          
-
+          <Main data={this.state.data.data} clicked={this.handleClick}/>
         </div>
 
 

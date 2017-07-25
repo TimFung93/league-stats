@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import Champion from './Champion';
 
 
 
 
 export default class Main extends Component {
 
-
-  handleChange() {
-    this.props.data
-  }
-
-  handleClick(event) {
-
-    console.log('button has been clicked')
-
-  }
+  
 
 
 
@@ -25,7 +17,7 @@ export default class Main extends Component {
     console.log(this.props)
 
       const championData = this.props.data
-   
+
 
 
       const getChampionData = function() {
@@ -96,9 +88,7 @@ export default class Main extends Component {
                       <h3><Link to={`/champion/${id}`} 
                                 activeClassName="active" 
                                 onClick={this.handleClick.bind(this)}>{id}
-
                       </Link></h3>
-                    
                   </div>
                 </div>
               </div>

@@ -1,7 +1,6 @@
 const express 				= require('express');
 const app 					= express();
 const request 				= require('request');
-const fs 					= require('fs');
 
 const config = require('./config')
 
@@ -31,7 +30,7 @@ app.get('/', (req,res) => {
 		if(err) {
 			console.log(err)
 		}
-
+		console.log(body)
 		res.send(JSON.parse(body))
 		
 	});

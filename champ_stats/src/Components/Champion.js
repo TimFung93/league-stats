@@ -8,31 +8,19 @@ import axios from 'axios';
 
 export default class Champion extends Component {
 
-  constructor(props) {
-    super(props)
 
-    this.State = {
-      data: []
+  shouldComponentUpdate(nextProps) { 
+    console.log(nextProps)
+    if(this.props.clicked === true) {
+      return true
     }
-
+    
   }
-
-  componentWillMount() {
-    console.log('get this data to appear on console please')
-  }
- 
-
-
-
-
 
   render() {
-  
-      // {const Champion = ({ match }) => (
-      //   {match.params.id}
-        
 
-     console.log(this.props)
+
+    console.log(this.props)
      
 
     return (

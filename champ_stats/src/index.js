@@ -17,7 +17,6 @@ ReactDOM.render((
 			<Route path='/Main' component={Main} />
         	<Route path="/champion/:id" name="champion" component={Champion} />
         	<Route path="/searchbar" component={Searchbar} />
-        	<Route path="/header" component={Header} />
         </div>		
 	</HashRouter>
 ), document.getElementById('root'));
