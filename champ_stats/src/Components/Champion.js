@@ -18,20 +18,7 @@ export default class Champion extends Component {
   }
 
   componentWillMount() {
-    axios.get('http://localhost:8080/champion/:id' ,{
-      params: {
-        id: parseInt(this.props.match.params.id)
-      }
-    })
-    .then(res => {
-      console.log(res)
-      this.setState({
-        data: res
-      })
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    console.log('get this data to appear on console please')
   }
  
 
@@ -45,7 +32,7 @@ export default class Champion extends Component {
       //   {match.params.id}
         
 
-     console.log(this.state)
+     console.log(this.props)
      
 
     return (

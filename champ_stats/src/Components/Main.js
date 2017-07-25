@@ -6,73 +6,29 @@ import {Link} from 'react-router-dom';
 
 
 export default class Main extends Component {
-  constructor() {
-    super()
 
-    this.state = {
-      data: [],
-      id: 0
-    }
 
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+  handleChange() {
+    this.props.data
   }
-
-
-  componentWillMount(){
-    axios.get('http://localhost:8080/')
-      .catch(err => {
-        console.log(err);
-      })
-      .then(res => {
-        if (res.status !== 200) {
-          throw "Network Error"
-        } else {
-          this.setState({
-            data: res
-          });
-        }
-        
-      })
-      
-  };
-
-
-
-
-
-  handleChange(event) {
-    this.setState({
-      value: event.target.value
-    });
-  }
-
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-
 
   handleClick(event) {
-    console.log(event.target)
-    // this.setState({
-    //   id: event.target.value
-    // });
 
-    // console.log(this.props.item)
-
+    console.log('button has been clicked')
 
   }
 
 
 
   render() {
-  
-      const championData = this.state.data.data
-     
+    
+    console.log(this.props)
 
-      const getChampionData = function(){
+      const championData = this.props.data
+   
+
+
+      const getChampionData = function() {
         let championDataObject = {
           champions: []
         };
@@ -93,23 +49,15 @@ export default class Main extends Component {
 
 
       let _championData = getChampionData();
-      //console.log(championData)
-      //console.log(_championData.champions)
-     
-      // let _championName = _championData.map(data => {
-      //   return {data}
-      // });
 
-      // console.log(_championName)
-      
     
-      console.log(this.state)
-  
       
       function champName(){
         let champName = []
         for (let i = 0; i < _championData.length; i++) {
-           champName.push(_championData[i].name)           
+          if(_championData[i].name !== undefined) {
+            champName.push(_championData[i].name)           
+          }
         }
          return champName
       }
@@ -117,7 +65,9 @@ export default class Main extends Component {
        function champId(){
         let champId = []
         for (let i = 0; i < _championData.length; i++) {
-           champId.push(_championData[i].id)           
+          if(_championData[i].id !== undefined) {
+            champId.push(_championData[i].id)           
+          }
         }
          return champId
       }
@@ -126,21 +76,14 @@ export default class Main extends Component {
       let _champName = champName()
       let _champId = champId()
    
-      // console.log(imageList)
-      // console.log(nameList)
-      // console.log(idList)
-      //console.log(_championName)
-
-      // let __championTitle = titleList.map(data =>{
-      //   return <p>{data}</p>
-      // });
-      let _____champName = Object.keys(_championData).forEach(function(key){
+   
+      // let _____champName = Object.keys(_championData).forEach(function(key){
       
-           let name = _championData[key].name
-           console.log(_championData[key].name)
+      //      let name = _championData[key].name
+      //      console.log(_championData[key].name)
         
        
-      });
+      // });
    
   
       let __champId = _champId.map(id => {
@@ -152,7 +95,7 @@ export default class Main extends Component {
                 
                       <h3><Link to={`/champion/${id}`} 
                                 activeClassName="active" 
-                                onClick={this.handleClick}>{id}
+                                onClick={this.handleClick.bind(this)}>{id}
 
                       </Link></h3>
                     
@@ -161,17 +104,7 @@ export default class Main extends Component {
               </div>
       });
 
-    
-
-
-      
-       // console.log(this.state.data)
-
-       // const champName = championData.map(key => {
-       //  return key
-       // });
-
-       // console.log(champName)
+  
 
      
 

@@ -13,13 +13,16 @@ class App extends Component {
       value: ''
     }
 
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.fetchData = this.fetchData.bind(this)
   }
 
 
   componentWillMount(){
+      this.fetchData()
+  };
+
+  fetchData() {
     axios.get('http://localhost:8080/')
       .catch(err => {
         console.log(err);
@@ -34,23 +37,11 @@ class App extends Component {
         }
         
       })
-  };
-
-
-  handleChange(event) {
-    this.setState({
-      value: event.target.value
-    });
   }
-
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-
 
   handleClick() {
     console.log('this linked as clicked')
+    
   }
 
 
